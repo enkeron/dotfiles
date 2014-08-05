@@ -1,0 +1,77 @@
+! urxvt
+!urxvt*background:                   #555244
+!urxvt*foreground:                    white
+
+URxvt*termName: rxvt-unicode-256color
+!urxvt*font:             xft:DejaVu Sans Mono:pixelsize=12
+urxvt*font:             xft:Monaco:pixelsize=12
+
+URxvt.tabbed.new-button: false
+URxvt.tabbed.autohide: true
+
+
+!Xft.dpi: 144
+Xft.antialias: true
+Xft.hinting: true
+Xft.hintstyle: hintfull
+Xft.rgba: rgb
+
+!URxvt*scrollBar: false
+URxvt*saveLines: 32767
+!URxvt.colorUL: #a9c9bc
+!URxvt*cursorColor: white
+!URxvt*cursorBlink: true
+!URxvt*geometry: 90x26
+URxvt*title: rxvt-256color
+
+
+URxvt*pastableTabs: false
+URxvt*jumpScroll: true
+URxvt*secondaryScroll: true
+URxvt.cursorUnderline: 1
+! jwr dark (slightly modified)
+URxvt.background: #080808
+URxvt.foreground: #c7c7c7
+
+! Black
+URxvt.color0: #242424
+URxvtcolor8: #474747
+! Red
+URxvt.color1: #8A2F58
+URxvt.color9: #CF4F88
+! Green
+URxvt.color2: #287373
+URxvt.color10: #53A6A6
+! Yellow
+URxvt.color3: #914E89
+URxvt.color11: #BF85CC
+! Blue
+URxvt.color4: #395573
+URxvt.color12: #4779B3
+! Magenta
+URxvt.color5: #5E468C
+URxvt.color13: #7F62B3
+! Cyan
+URxvt.color6: #2B7694
+URxvt.color14: #47959E
+! White
+URxvt.color7: #dddddd
+URxvt.color15: #dddddd
+
+URxvt*buffered: true
+URxvt*cursorBlink: false
+URxvt*cursorUnderlline: false
+URxvt*geometry: 80x25
+
+URxvt*scrollBar: false
+URxvt*scrollstyle: plain
+URxvt*scrollWithBuffer: false
+URxvt*scrollTtyOutput: true
+URxvt*pointerBlank: true
+
+
+
+
+
+
+
