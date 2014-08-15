@@ -78,9 +78,8 @@ layouts =
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-   names  = { "www", "dev", "code", "float", "media", "music", 7},
-   layout = { layouts[6], layouts[2], layouts[2], layouts[1], layouts[4],
-              layouts[6], layouts[6] 
+   names  = { "www", "term", "code", "float", "media"},
+   layout = { layouts[6], layouts[2], layouts[2], layouts[1], layouts[1]
  }}
  
  for s = 1, screen.count() do
@@ -185,8 +184,8 @@ myvolimg.image = image("/home/mahen/.config/awesome/vol.png")
     kbdcfg.widget.text = " " .. '<span color="#9bcd32"> ' .. kbdcfg.layout[kbdcfg.current] .. '</span>' ..  " "
     kbdcfg.switch = function ()
        kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
-       local t = " " .. kbdcfg.layout[kbdcfg.current] .. " "
-       kbdcfg.widget.text = t
+       local t = " " .. kbdcfg.layout[kbdcfg.current] .." "
+       kbdcfg.widget.text = '<span color="#9bcd32"> '.. t .. '</span>' 
        os.execute( kbdcfg.cmd .. t )
     end
     
@@ -234,6 +233,14 @@ memimg.image = image("/home/enkeron/.config/awesome/themes/zenburn/tp/ram.png")
 separator = widget({ type = "textbox" })
 separator.text  = "  "
 
+--separator_scope_start
+opscope_separator = widget({ type = "textbox" })
+
+opscope_separator.text = "["
+
+--separator_scope_end
+endscope_separator = widget({ type = "textbox" })
+endscope_separator.text = "]"
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
 
