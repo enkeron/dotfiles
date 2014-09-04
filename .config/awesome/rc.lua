@@ -79,7 +79,7 @@ layouts =
 -- Define a tag table which hold all screen tags.
 tags = {
    names  = { "www", "term", "code", "float", "media"},
-   layout = { layouts[6], layouts[2], layouts[2], layouts[1], layouts[1]
+   layout = { layouts[6], layouts[4], layouts[2], layouts[1], layouts[1]
  }}
  
  for s = 1, screen.count() do
@@ -97,7 +97,8 @@ myawesomemenu = {
 }
 power = {
 	{ "reboot", terminal .. " -e sudo reboot" },
-	{ "power off", terminal .. " -e sudo poweroff" }
+	{ "power off", terminal .. " -e sudo poweroff" },
+	{ "suspend", terminal .. " -e sudo pm-suspend" }
 }
 officemenu = {
 	{ "base",	"libreoffice --base"	},
@@ -151,7 +152,10 @@ vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 21, "BAT0")
 netwidget = widget({ type = "textbox" })
 vicious.register(netwidget, vicious.widgets.net, '${enp4s0 down_kb} ${enp4s0 up_kb}', 3)
 
-
+-- {{{ CPU temperature
+thermalwidget  = widget({ type = "textbox" })
+vicious.register(thermalwidget, vicious.widgets.thermal, " $1°", 20, { "coretemp.0", "core"} )
+-- }}}
 --WIFI
 wifinetwidget = widget({ type = "textbox" })
 vicious.register(netwidget, vicious.widgets.wifi, '${linp}' , 3, "eth2")
@@ -232,15 +236,8 @@ memimg.image = image("/home/enkeron/.config/awesome/themes/zenburn/tp/ram.png")
 -- separator
 separator = widget({ type = "textbox" })
 separator.text  = "  "
-
---separator_scope_start
-opscope_separator = widget({ type = "textbox" })
-
-opscope_separator.text = "["
-
---separator_scope_end
-endscope_separator = widget({ type = "textbox" })
-endscope_separator.text = "]"
+line = widget({ type = "textbox" })
+line.text  = " | "
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
 
@@ -327,10 +324,10 @@ for s = 1, screen.count() do
 	batwidget, battext, separator,
 	memwidget,memtext,separator,
 	cpuwidget,cputext,separator,
-	
+	thermalwidget,separator,  
 
 	
-fswidget,separator,
+	fswidget,separator,
 	
 	
 	kbdcfg.widget, separator,volumecfg.widget,
@@ -468,19 +465,20 @@ for i = 1, keynumber do
                           awful.client.toggletag(tags[client.focus.screen][i])
                       end
                   end),
+		  
+
 		  --my Keys
-		  --keyboard ALT+SHIFT_R
+		  --keyboard ALT+SHIFT_L
 		  awful.key({ "Mod1" }, "Shift_R", function () kbdcfg.switch() end),
 
---Volume control
- awful.key({}, "XF86AudioMute", function() pulseaudio.volumeMute(); volumewidget.text = pulseaudio.volumeInfo() end),
-        awful.key({}, "XF86AudioLowerVolume", function() pulseaudio.volumeDown(); volumewidget.text = pulseaudio.volumeInfo() end),
-        awful.key({}, "XF86AudioRaiseVolume", function() pulseaudio.volumeUp(); volumewidget.text = pulseaudio.volumeInfo() end),
---Change brightness of laptop
-awful.key({ }, "XF86MonBrightnessDown", function ()
-        awful.util.spawn("xbacklight -dec 15") end),
-    awful.key({ }, "XF86MonBrightnessUp", function ()
-        awful.util.spawn("xbacklight -inc 15") end)
+          --Volume control
+          awful.key({}, "XF86AudioMute", function() pulseaudio.volumeMute(); volumewidget.text = pulseaudio.volumeInfo() end),
+          awful.key({}, "XF86AudioLowerVolume", function() pulseaudio.volumeDown(); volumewidget.text = pulseaudio.volumeInfo() end),
+          awful.key({}, "XF86AudioRaiseVolume", function() pulseaudio.volumeUp(); volumewidget.text = pulseaudio.volumeInfo() end),
+          --Change brightness of laptop
+          awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 15") end),
+          awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight -inc 15") end),
+          awful.key({ modkey }, "F12", function () awful.util.spawn("slock") end)
 
 )
 end
