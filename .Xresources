@@ -2,13 +2,13 @@
 !urxvt*background:                   #555244
 !urxvt*foreground:                    white
 
-URxvt*termName: rxvt-unicode-256color
+!URxvt*termName: rxvt-unicode-256color
 !urxvt*font:             xft:DejaVu Sans Mono:pixelsize=12
 urxvt*font:             xft:Monaco:pixelsize=12
 
 URxvt.tabbed.new-button: false
 URxvt.tabbed.autohide: true
-
+URxvt*pastableTabs: false
 
 !Xft.dpi: 144
 Xft.antialias: true
@@ -16,22 +16,43 @@ Xft.hinting: true
 Xft.hintstyle: hintfull
 Xft.rgba: rgb
 
-!URxvt*scrollBar: false
 URxvt*saveLines: 32767
-!URxvt.colorUL: #a9c9bc
+URxvt.colorUL: #a9c9bc
 !URxvt*cursorColor: white
 !URxvt*cursorBlink: true
 !URxvt*geometry: 90x26
-URxvt*title: rxvt-256color
+!URxvt*title: rxvt-256color
+URxvt*title:Terminal 
 
-
-URxvt*pastableTabs: false
 URxvt*jumpScroll: true
 URxvt*secondaryScroll: true
-URxvt.cursorUnderline: 1
 ! jwr dark (slightly modified)
 URxvt.background: #080808
 URxvt.foreground: #c7c7c7
+
+URxvt.perl-ext: default,url-select
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
+
+*background: #002b36
+*foreground: #657b83
+!!*fading: 40
+*fadeColor: #002b36
+*cursorColor: #93a1a1
+*pointerColorBackground: #586e75
+*pointerColorForeground: #93a1a1
+
+URxvt*buffered: true
+!URxvt*cursorBlink: false
+!URxvt*cursorUnderlline: false
+URxvt*geometry: 80x25
+
+URxvt*scrollBar: false
+URxvt*scrollstyle: plain
+URxvt*scrollWithBuffer: false
+URxvt*scrollTtyOutput: true
+URxvt*pointerBlank: true
 
 ! Black
 URxvt.color0: #242424
@@ -58,20 +79,38 @@ URxvt.color14: #47959E
 URxvt.color7: #dddddd
 URxvt.color15: #dddddd
 
-URxvt*buffered: true
-URxvt*cursorBlink: false
-URxvt*cursorUnderlline: false
-URxvt*geometry: 80x25
-
-URxvt*scrollBar: false
-URxvt*scrollstyle: plain
-URxvt*scrollWithBuffer: false
-URxvt*scrollTtyOutput: true
-URxvt*pointerBlank: true
 
 
-
-
-
-
-
+!solirized theme
+ 
+!!! black dark/light
+!*color0: #073642
+!*color8: #002b36
+! 
+!!! red dark/light
+!*color1: #dc322f
+!*color9: #cb4b16
+! 
+!!! green dark/light
+!*color2: #859900
+!*color10: #586e75
+! 
+!!! yellow dark/light
+!*color3: #b58900
+!*color11: #657b83
+! 
+!!! blue dark/light
+!*color4: #268bd2
+!*color12: #839496
+! 
+!!! magenta dark/light
+!*color5: #d33682
+!*color13: #6c71c4
+! 
+!!! cyan dark/light
+!*color6: #2aa198
+!*color14: #93a1a1
+! 
+!!! white dark/light
+!*color7: #eee8d5
+!*color15: #fdf6e3

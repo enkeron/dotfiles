@@ -6,14 +6,42 @@ require("awful.rules")
 require("beautiful")
 -- Notification library
 require("naughty")
-
 -- Load Debian menu entries
 require("debian.menu")
 
 vicious = require("vicious")
 require("pulseaudio")
 
-
+cardid  = 0
+ channel = "Master"
+ function volume (mode, widget)
+ 	if mode == "update" then
+              local fd = io.popen("amixer -c " .. cardid .. " -- sget " .. channel)
+              local status = fd:read("*all")
+              fd:close()
+ 		
+ 		local volume = string.match(status, "(%d?%d?%d)%%")
+ 		volume = string.format("% 3d", volume)
+ 
+ 		status = string.match(status, "%[(o[^%]]*)%]")
+ 
+ 		if string.find(status, "on", 1, true) then
+ 			volume = volume .. "%"
+ 		else
+ 			volume = volume .. "M"
+ 		end
+ 		widget.text = volume
+ 	elseif mode == "up" then
+ 		io.popen("amixer -q -c " .. cardid .. " sset " .. channel .. " 5%+"):read("*all")
+ 		volume("update", widget)
+ 	elseif mode == "down" then
+ 		io.popen("amixer -q -c " .. cardid .. " sset " .. channel .. " 5%-"):read("*all")
+ 		volume("update", widget)
+ 	else
+ 		io.popen("amixer -c " .. cardid .. " sset " .. channel .. " toggle"):read("*all")
+ 		volume("update", widget)
+ 	end
+ end
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -78,7 +106,7 @@ layouts =
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-   names  = { "www", "term", "code", "float", "media"},
+   names  = { "web", "sys", "dev", "float ", "media"},
    layout = { layouts[6], layouts[4], layouts[2], layouts[1], layouts[1]
  }}
  
@@ -121,6 +149,15 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- }}}
 
 -- {{{ Wibox
+-- Volume control ALSA
+tb_volume = widget({ type = "textbox", name = "tb_volume", align = "right" })
+ tb_volume:buttons({
+ 	button({ }, 4, function () volume("up", tb_volume) end),
+ 	button({ }, 5, function () volume("down", tb_volume) end),
+ 	button({ }, 1, function () volume("mute", tb_volume) end)
+ })
+ volume("update", tb_volume)
+-- Voluem Control PulseAudio
 volumetext = widget({ type = "textbox" })
 volumetext.text = '<span color="#1793d1">vol</span> '
  volumewidget = widget({
@@ -158,11 +195,11 @@ vicious.register(thermalwidget, vicious.widgets.thermal, " $1°", 20, { "coretem
 -- }}}
 --WIFI
 wifinetwidget = widget({ type = "textbox" })
-vicious.register(netwidget, vicious.widgets.wifi, '${linp}' , 3, "eth2")
+vicious.register(netwidget, vicious.widgets.wifi, '${linp}' , 3, "wlan0")
 wifinetwidget2 = widget({ type = "textbox" })
-vicious.register(wifinetwidget2, vicious.widgets.wifi, "${ssid} Rate: ${rate}MB/s Link: ${linp}%", 3, "eth2")
+vicious.register(wifinetwidget2, vicious.widgets.wifi, "${ssid} Rate: ${rate}MB/s Link: ${sign}%", 3, "wlan0")
 wifiimg = widget({ type = "imagebox" })
-wifiimg.image = image("/home/enkeron/.config/awesome/themes/zenburn/tp/wifi.png")
+--wifiimg.image = image("/home/enkeron/.config/awesome/themes/zenburn/tp/wifi.png")
 
 
 
@@ -177,7 +214,7 @@ volumecfg_t = awful.tooltip({ objects = { volumecfg.widget },})
 volumecfg_t:set_text("Volume")
 
 myvolimg = widget({ type = "imagebox" })
-myvolimg.image = image("/home/mahen/.config/awesome/vol.png")
+myvolimg.image = image("/home/enkeron/.config/awesome/themes/zenburn/tp/vol.png")
 
 -- Keyboard widget
  kbdcfg = {}
@@ -233,7 +270,12 @@ vicious.register(memwidget, vicious.widgets.mem, "$2MB", 25)
 
 memimg = widget({ type = "imagebox" })
 memimg.image = image("/home/enkeron/.config/awesome/themes/zenburn/tp/ram.png")
--- separator
+
+-- Memory /root and /home 
+fswidget = widget({ type = "textbox" })
+vicious.register(fswidget, vicious.widgets.fs, "root- ${/ used_gb}gb / ${/home avail_gb}gb", 37)
+
+-- Separator
 separator = widget({ type = "textbox" })
 separator.text  = "  "
 line = widget({ type = "textbox" })
@@ -320,17 +362,16 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         mytextclock,separator,
-	volumewidget,volumetext, separator,	
-	batwidget, battext, separator,
-	memwidget,memtext,separator,
-	cpuwidget,cputext,separator,
-	thermalwidget,separator,  
-
-	
-	fswidget,separator,
+	volumewidget,myvolimg, separator,	
+	batwidget,batimg,separator,
+	memwidget,memimg,separator,
+	cpuwidget,cpuicon,separator,
 	
 	
-	kbdcfg.widget, separator,volumecfg.widget,
+	cklight,
+	--fswidget,separator,
+	--fswidget,
+	kbdcfg.widget, 
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft

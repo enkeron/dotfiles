@@ -1,21 +1,18 @@
 playlist_directory "/home/enkeron/.mpd/playlists"
 mpd_music_dir = "/home/enkeron/Music"
-audio_output {
-        type            "alsa"
-        name            "MPD ALSA"
-        mixer_type      "software"
-        mixer_device    "default"
-        mixer_control   "PCM"
-}
 #playlist_disable_highlight_delay = "1"
 #playlist_display_mode = "columns" (classic/columns)
 #song_columns_list_format = "(30)[green]{t|f} (30)[red]{a} (30)[blue]{l}"
-song_list_format = " $3%a $7»» $8%t $R$3%l "
-song_status_format = "$8%a $7» $3%b $7» $8%t$1"
-now_playing_prefix = " $b$2»$2»$2»$2"
+#song_list_format = " $3%a $7»» $8%t $R$3%l "
+#song_status_format = "$8%a $7» $3%b $7» $8%t$1"
+now_playing_prefix = " $b$2»$2»$2»$2 "
 now_playing_suffix = "$/b"
+# song format
+song_list_format = "{$2%a - $9}{$4%t$9}|{$5%f$9}$R{$5 %b$9}{$8 %l$9}"
+
 
 header_visibility = "no"
+
 statusbar_visibility = "no"
 fancy_scrolling = "yes"
 
