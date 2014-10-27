@@ -222,11 +222,11 @@ myvolimg.image = image("/home/enkeron/.config/awesome/themes/zenburn/tp/vol.png"
     kbdcfg.layout = { "pl", "ru" }
     kbdcfg.current = 1  -- us is our default layout
     kbdcfg.widget = widget({ type = "textbox", align = "right" })
-    kbdcfg.widget.text = " " .. '<span color="#9bcd32"> ' .. kbdcfg.layout[kbdcfg.current] .. '</span>' ..  " "
+    kbdcfg.widget.text = " " .. '<span color="#8ed1f3"> ' .. kbdcfg.layout[kbdcfg.current] .. '</span>' ..  " "
     kbdcfg.switch = function ()
        kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
        local t = " " .. kbdcfg.layout[kbdcfg.current] .." "
-       kbdcfg.widget.text = '<span color="#9bcd32"> '.. t .. '</span>' 
+       kbdcfg.widget.text = '<span color="#8ed1f3"> '.. t .. '</span>' 
        os.execute( kbdcfg.cmd .. t )
     end
     
@@ -249,7 +249,7 @@ vicious.register(diowidget, vicious.widgets.dio, "I/O:[${sda write_kb}|${sda rea
 
 --{{{ Uptime
 uptime = widget ({ type = "textbox" })
-vicious.register(uptime, vicious.widgets.uptime, " $2:$3", 10)
+vicious.register(uptime, vicious.widgets.uptime, " $2:$3", 60)
 
 
 -- CPU Usage widget     
@@ -273,7 +273,8 @@ memimg.image = image("/home/enkeron/.config/awesome/themes/zenburn/tp/ram.png")
 
 -- Memory /root and /home 
 fswidget = widget({ type = "textbox" })
-vicious.register(fswidget, vicious.widgets.fs, "root- ${/ used_gb}gb / ${/home avail_gb}gb", 37)
+vicious.register(fswidget, vicious.widgets.fs, "root- ${/ avail_gb}gb / ${/home avail_gb}gb", 37)
+--used_gb
 
 -- Separator
 separator = widget({ type = "textbox" })
@@ -281,7 +282,11 @@ separator.text  = "  "
 line = widget({ type = "textbox" })
 line.text  = " | "
 -- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right" })
+--mytextclock = awful.widget.textclock({ align = "right" })
+-- Initialize widget
+mytextclock = widget({ type = "textbox" })
+-- Register widget
+vicious.register(mytextclock, vicious.widgets.date, "%d/%m/%y , %R", 60)
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
@@ -364,12 +369,12 @@ for s = 1, screen.count() do
         mytextclock,separator,
 	volumewidget,myvolimg, separator,	
 	batwidget,batimg,separator,
-	memwidget,memimg,separator,
-	cpuwidget,cpuicon,separator,
+	--memwidget,memimg,separator,
+	--cpuwidget,cpuicon,separator,
 	
 	
 	cklight,
-	--fswidget,separator,
+--	fswidget,separator,
 	--fswidget,
 	kbdcfg.widget, 
         s == 1 and mysystray or nil,
