@@ -5,10 +5,7 @@
 !URxvt*termName: rxvt-unicode-256color
 !urxvt*font:             xft:DejaVu Sans Mono:pixelsize=12
 urxvt*font:             xft:Monaco:pixelsize=12
-
-URxvt.tabbed.new-button: false
-URxvt.tabbed.autohide: true
-URxvt*pastableTabs: false
+URxvt.perl-ext-common:default,matcher
 
 !Xft.dpi: 144
 Xft.antialias: true
@@ -30,10 +27,14 @@ URxvt*secondaryScroll: true
 URxvt.background: #080808
 URxvt.foreground: #c7c7c7
 
-URxvt.perl-ext: default,url-select
-URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.launcher: /usr/bin/xdg-open
-URxvt.url-select.underline: true
+
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+!URxvt.colorUL: #395573
+!URxvt.perl-ext: default,url-select
+!URxvt.keysym.M-u: perl:url-select:select_next
+!URxvt.url-select.launcher: /usr/bin/xdg-open
+!URxvt.url-select.underline: true
 
 *background: #002b36
 *foreground: #657b83
