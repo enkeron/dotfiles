@@ -9,9 +9,13 @@ require("naughty")
 -- Load Debian menu entries
 require("debian.menu")
 
+-- red colors
+-- #d47133
+brown_orange ='<span color="#d47133">'
+backsp = '</span>'
 vicious = require("vicious")
 require("pulseaudio")
-
+--require("battare_alarm")
 cardid  = 0
  channel = "Master"
  function volume (mode, widget)
@@ -72,7 +76,8 @@ end
 -- Themes define colours, icons, and wallpapers
 --beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 --beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
-beautiful.init(awful.util.getdir("config") .. "/themes/default/theme.lua")
+--beautiful.init(awful.util.getdir("config") .. "/themes/default/theme.lua")
+beautiful.init(awful.util.getdir("config") .. "/themes/copland/theme.lua")
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "editor"
@@ -106,7 +111,7 @@ layouts =
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-   names  = { "web", "sys", "dev", "float ", "media"},
+   names  = { "web", "sys", "dev", "float", "media"},
    layout = { layouts[6], layouts[4], layouts[2], layouts[1], layouts[1]
  }}
  
@@ -183,7 +188,27 @@ batwidget = widget({ type = "textbox" })
 batimg = widget({ type = "imagebox" })
 batimg.image = image("/home/enkeron/.config/awesome/themes/zenburn/tp/batmed.png")
 -- Register widget
-vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 21, "BAT0")
+--isBatLessThan5 = "no"
+--vicious.register(batwidget, vicious.widgets.bat,
+--function (widget, args)
+--	if isBatLessThan5 == "yes" then
+----		widget:set_color(gradient(0, 100, tonumber(args[2])))
+--		return args[2]
+--	elseif args[2] < 100 then
+--		naughty.notify({
+--			timeout = 20, title = "Battery", text = "Your battery is getting low \n" ..
+--			"You should probably plug in your charger. This is your last warning."
+--		})
+--		isBatLessThan5 = "yes"
+----		widget:set_color(gradient(0, 100, tonumber(args[2])))
+--		return args[2]
+--	else
+----		widget:set_color(gradient(0, 100, tonumber(args[2])))
+--		return args[2]
+--	end
+--end,
+--60, "BAT0")
+vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 121, "BAT0")
 --Data
 
 netwidget = widget({ type = "textbox" })
@@ -217,16 +242,17 @@ myvolimg = widget({ type = "imagebox" })
 myvolimg.image = image("/home/enkeron/.config/awesome/themes/zenburn/tp/vol.png")
 
 -- Keyboard widget
+--cf7843Span for blue theme<span color="#8ed1f3"> 
  kbdcfg = {}
     kbdcfg.cmd = "setxkbmap"
     kbdcfg.layout = { "pl", "ru" }
     kbdcfg.current = 1  -- us is our default layout
     kbdcfg.widget = widget({ type = "textbox", align = "right" })
-    kbdcfg.widget.text = " " .. '<span color="#8ed1f3"> ' .. kbdcfg.layout[kbdcfg.current] .. '</span>' ..  " "
+    kbdcfg.widget.text = " " .. '<span color="#cf7843"> ' .. kbdcfg.layout[kbdcfg.current] .. '</span>' ..  " "
     kbdcfg.switch = function ()
        kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
        local t = " " .. kbdcfg.layout[kbdcfg.current] .." "
-       kbdcfg.widget.text = '<span color="#8ed1f3"> '.. t .. '</span>' 
+       kbdcfg.widget.text = '<span color="#cf7843"> '.. t .. '</span>' 
        os.execute( kbdcfg.cmd .. t )
     end
     
@@ -286,7 +312,7 @@ line.text  = " | "
 -- Initialize widget
 mytextclock = widget({ type = "textbox" })
 -- Register widget
-vicious.register(mytextclock, vicious.widgets.date, "%d/%m/%y , %R", 60)
+vicious.register(mytextclock, vicious.widgets.date, "%d/%m/%y ," .. brown_orange .. " %R" .. backsp, 60)
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
@@ -589,3 +615,4 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+

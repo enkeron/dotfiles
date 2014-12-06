@@ -77,7 +77,7 @@ theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/defau
 
 -- You can use your own command to set your wallpaper
 --theme.wallpaper_cmd = { "awsetbg /usr/share/awesome/themes/default/background.png" }
-theme.wallpaper_cmd = { "awsetbg -f /home/enkeron/Pictures/pl.png" }
+--theme.wallpaper_cmd = { "awsetbg -f /home/enkeron/Pictures/pl.png" }
 --theme.wallpaper_cmd = { "nitrogen --restore &" }
 
 -- You can use your own layout icons like this:
@@ -97,4 +97,3 @@ theme.layout_dwindle = "/home/enkeron/.config/awesome/themes/default/layouts/dwi
 theme.awesome_icon = "/home/enkeron/.config/awesome/themes/default/awesome16.png"
 
 return theme
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:encoding=utf-8:textwidth=80

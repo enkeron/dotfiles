@@ -8,9 +8,10 @@
 theme                                           = {}
 
 theme.dir                                       = "/home/enkeron/.config/awesome/themes/copland"
-theme.wallpaper                                 = "/home/enkeron/Pictures/bmw.jpg"
-
+--theme.wallpaper                                 = theme.dir .."bmw.jpg"
+--theme.wallpaper_cmd = { "awsetbg /home/enkeron/.config/awesome/themes/copland/bmw.jpg" }
 theme.font                                      = "Monaco 8"
+
 theme.fg_normal                                 = "#BBBBBB"
 theme.fg_focus                                  = "#cf7843"
 --theme.fg_focus                                  = "#78A4FF"
