@@ -12,6 +12,7 @@ urxvt*font:             xft:Monaco:pixelsize=12
 !urxvt*boldFont: xft:Terminus
 URxvt.perl-ext-common:default,matcher
 
+
 Xft.dpi: 96
 Xft.antialias: true
 Xft.hinting: true
@@ -29,7 +30,7 @@ URxvt*title:Terminal
 URxvt*jumpScroll: true
 URxvt*secondaryScroll: true
 ! jwr dark (slightly modified)
-URxvt.background: #080808
+!URxvt.background: #080808
 URxvt.foreground: #c7c7c7
 
 
@@ -121,3 +122,10 @@ URxvt*pointerBlank: true
 !!! white dark/light
 !*color7: #eee8d5
 !*color15: #fdf6e3
+emacs*Background: DarkSlateGray
+emacs*Foreground: Wheat
+emacs*pointerColor: Orchid
+emacs*cursorColor: Orchid
+emacs*bitmapIcon: on
+emacs*font: fixed
+emacs.geometry: 80x25
